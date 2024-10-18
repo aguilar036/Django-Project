@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Pregunta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .form-section {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">
+        <div class="form-section">
+            <label for="question_text">Texto de la pregunta</label>
+            <input type="text" name="question_text" id="question_text" min="1" required>
+        </div>
+
+        <div class="form-section">
+            <label for="pub_date">Fecha de publicación</label>
+            <input type="date" id="pub_date" name="pub_date" required>
+        </div>
+
+        <h3>Opciones</h3>
+        {% for i in "1234" %}
+        <div class="form-section">
+            <label for="choice_text_{{ forloop.counter }}">Opción {{ forloop.counter }}:</label>
+            <input type="text" name="choice_text" id="choice_text_{{ forloop.counter }}">
+        </div>
+        {% endfor %}
+
+        <input type="submit" value="Enviar">
+        {% csrf_token %}
+    </form>
+</body>
+</html>
